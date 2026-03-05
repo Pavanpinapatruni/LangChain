@@ -1,2 +1,46 @@
+# Core ML/AI Packages with GPU Support
+--index-url https://download.pytorch.org/whl/cu121
+torch>=2.5.0
+torchvision>=0.20.0
+torchaudio>=2.5.0
+
+matplotlib
+
+# LangChain and Related
 langchain
-notebook
+langchain-groq
+langchain-openai
+langchain_community
+langchain-text-splitters
+langchain-huggingface
+langchain-azure-ai
+
+
+#azure libraries
+azure-ai-inference
+
+# Vector Databases and Embeddings
+chromadb
+sentence-transformers
+faiss-cpu  # Note: faiss-gpu not available for Windows, but PyTorch will use GPU
+
+# Utilities
+python-dotenv
+ipykernel
+ipywidgets
+
+# Document Processing
+unstructured
+unstructured[docx]
+pypdf
+bs4
+arxiv
+pymupdf
+wikipedia
+python-docx
+docx2txt
+
+# Other Tools
+tqdm
+tiktoken
+jq
