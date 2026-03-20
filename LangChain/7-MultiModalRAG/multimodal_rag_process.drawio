@@ -1,0 +1,205 @@
+<mxfile host="65bd71144e">
+    <diagram name="Multimodal RAG Process" id="multimodal-rag-flow">
+        <mxGraphModel dx="1056" dy="707" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="Multimodal RAG Pipeline - PDF Processing with Text and Images" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="417" y="20" width="600" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="phase1-title" value="Phase 1: Setup &amp; Initialization" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="64" y="100" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="dependencies" value="Import Dependencies&#xa;• PyMuPDF (fitz)&#xa;• transformers (CLIP)&#xa;• LangChain components&#xa;• FAISS, PIL, torch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="64" y="150" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="gpu-check" value="GPU Detection&#xa;• Check CUDA availability&#xa;• Set device (CPU/GPU)&#xa;• Move models to device" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="64" y="250" width="200" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="clip-init" value="CLIP Model Initialization&#xa;• Load openai/clip-vit-base-patch32&#xa;• Initialize processor&#xa;• Set to evaluation mode&#xa;• Move to GPU if available" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="64" y="340" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="phase2-title" value="Phase 2: PDF Processing Pipeline" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="417" y="100" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="pdf-input" value="PDF Input&#xa;multimodal_sample.pdf" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="467" y="150" width="150" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="page-processing" value="Process Each Page" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="467" y="220" width="150" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="text-branch" value="Text Processing" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="317" y="300" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="text-extract" value="Extract Text from Page&#xa;using fitz.get_text()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="297" y="360" width="160" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="text-chunk" value="Text Chunking&#xa;• RecursiveCharacterTextSplitter&#xa;• chunk_size=500&#xa;• chunk_overlap=50" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="297" y="430" width="160" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="text-embed" value="Create CLIP Text Embeddings&#xa;• Process each chunk&#xa;• get_text_embedding()&#xa;• L2 normalization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="297" y="520" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="image-branch" value="Image Processing" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="597" y="300" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="image-extract" value="Extract Images&#xa;• page.get_images()&#xa;• Extract image bytes&#xa;• Convert to PIL format" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="577" y="360" width="160" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="image-base64" value="Base64 Conversion&#xa;• Convert to PNG format&#xa;• Encode as base64&#xa;• Store in image_data_store" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="577" y="450" width="160" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="image-embed" value="Create CLIP Image Embeddings&#xa;• get_image_embedding()&#xa;• L2 normalization&#xa;• Same vector space as text" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="577" y="540" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="phase3-title" value="Phase 3: Vector Store Creation" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="817" y="100" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="combine-embeddings" value="Combine All Embeddings&#xa;• Text chunks + Images&#xa;• Unified vector space&#xa;• Create embeddings array" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="837" y="350" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="faiss-store" value="FAISS Vector Store&#xa;• Store unified embeddings&#xa;• Enable similarity search&#xa;• Include metadata" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="837" y="450" width="160" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="phase4-title" value="Phase 4: Query Processing &amp; Retrieval" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="1067" y="100" width="220" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="user-query" value="User Query&#xa;&quot;What does the chart show?&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="1097" y="160" width="160" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="query-embed" value="Query Embedding&#xa;• Convert query to CLIP embedding&#xa;• get_text_embedding()&#xa;• Same vector space" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="1097" y="230" width="160" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="similarity-search" value="Similarity Search&lt;br&gt;• vector_store.similarity_&lt;div&gt;search_by_vector()&lt;br&gt;• Retrieve top-k documents&lt;br&gt;• Both text and images&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="1097" y="320" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="retrieved-docs" value="Retrieved Documents&#xa;• Relevant text chunks&#xa;• Relevant images&#xa;• Metadata (page, type)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="1097" y="420" width="160" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="phase5-title" value="Phase 5: Multimodal Response Generation" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="1317" y="100" width="240" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="message-format" value="Format GPT-4V Message&#xa;• Separate text and images&#xa;• Add base64 images&#xa;• Structure content array" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="1357" y="160" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="gpt4v" value="GPT-4V Processing&#xa;• Multimodal understanding&#xa;• Text + image analysis&#xa;• Generate final answer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="1357" y="260" width="160" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="final-answer" value="Final Answer&#xa;• Comprehensive response&#xa;• Based on retrieved context&#xa;• Text + visual insights" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="1357" y="350" width="160" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="components-title" value="Key Components &amp; Functions" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="167" y="650" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="functions-list" value="Core Functions:&#xa;• get_text_embedding()&#xa;• get_image_embedding()&#xa;• process_text()&#xa;• process_images()&#xa;• process_pdf()&#xa;• retrieve_multimodal()&#xa;• create_multimodal_message()&#xa;• multimodal_pdf_rag_pipeline()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="167" y="700" width="200" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="tech-title" value="Technologies Used" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="417" y="650" width="160" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="tech-list" value="• PyMuPDF (PDF processing)&#xa;• CLIP (unified embeddings)&#xa;• FAISS (vector search)&#xa;• LangChain (RAG pipeline)&#xa;• OpenAI GPT-4V (multimodal LLM)&#xa;• PyTorch (deep learning)&#xa;• PIL (image processing)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="417" y="700" width="160" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="features-title" value="Key Features" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="617" y="650" width="160" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="features-list" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;•&lt;/span&gt;&amp;nbsp;Unified text-image embeddings&lt;br&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;•&lt;/span&gt;&amp;nbsp;GPU acceleration support&lt;br&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;•&lt;/span&gt;&amp;nbsp;Base64 image encoding&lt;br&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;•&lt;/span&gt;&amp;nbsp;Robust error handling&lt;br&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;•&lt;/span&gt;&amp;nbsp;Metadata tracking&lt;br&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;•&lt;/span&gt;&amp;nbsp;Configurable chunking&lt;br&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;•&lt;/span&gt;&amp;nbsp;Similarity-based retrieval&lt;br&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;•&lt;/span&gt;&amp;nbsp;Multimodal response generation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="617" y="700" width="160" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="pdf-input" target="page-processing" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="page-processing" target="text-branch" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="542" y="280"/>
+                            <mxPoint x="377" y="280"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="page-processing" target="image-branch" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="542" y="280"/>
+                            <mxPoint x="657" y="280"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="text-branch" target="text-extract" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="text-extract" target="text-chunk" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="text-chunk" target="text-embed" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="image-branch" target="image-extract" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="image-extract" target="image-base64" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="image-base64" target="image-embed" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="text-embed" target="combine-embeddings" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="517" y="560"/>
+                            <mxPoint x="517" y="630"/>
+                            <mxPoint x="767" y="630"/>
+                            <mxPoint x="767" y="390"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="image-embed" target="combine-embeddings" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="747" y="580"/>
+                            <mxPoint x="747" y="390"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="combine-embeddings" target="faiss-store" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="user-query" target="query-embed" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="query-embed" target="similarity-search" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="similarity-search" target="retrieved-docs" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="retrieved-docs" target="message-format" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1177" y="500"/>
+                            <mxPoint x="1317" y="500"/>
+                            <mxPoint x="1317" y="200"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="message-format" target="gpt4v" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="gpt4v" target="final-answer" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;" parent="1" source="faiss-store" target="similarity-search" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1017" y="485"/>
+                            <mxPoint x="1017" y="360"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="pipeline-flow" value="Complete Pipeline Flow" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#f0f0f0;strokeColor=#666666;" parent="1" vertex="1">
+                    <mxGeometry x="817" y="550" width="200" height="40" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

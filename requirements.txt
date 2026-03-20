@@ -1,51 +1,73 @@
 # Core ML/AI Packages with GPU Support
 --index-url https://download.pytorch.org/whl/cu121
-torch>=2.5.0
-torchvision>=0.20.0
-torchaudio>=2.5.0
+torch==2.5.1+cu121
+torchvision==0.20.1+cu121
+torchaudio==2.5.1+cu121
+transformers==5.3.0
+huggingface-hub==1.7.1
+tokenizers==0.22.2
+safetensors==0.7.0
 
-matplotlib
-rank_bm25
-beautifulsoup4
-streamlit
+# Core dependencies
+matplotlib==3.10.8
+rank-bm25==0.2.2
+beautifulsoup4==4.14.3
+streamlit==1.55.0
+numpy==2.4.3
+pillow==12.1.1
+scikit-learn==1.8.0
+scipy==1.17.1
 
 # LangChain and Related
-langchain
-langchain-groq
-langchain-openai
-langchain_community
-langchain-text-splitters
-langchain-huggingface
-langchain-azure-ai
-langchain-experimental
-langchain_ollama
+langchain==1.2.10
+langchain-groq==1.1.2
+langchain-openai==1.1.10
+langchain-community==0.4.1
+langchain-text-splitters==1.1.1
+langchain-huggingface==1.2.0
+langchain-azure-ai==1.0.0
+langchain-experimental==0.4.1
+langchain-ollama==1.0.1
+langchain-core==1.2.16
+langchain-classic==1.0.1
+langsmith==0.7.7
 
-
-#azure libraries
-azure-ai-inference
+# Azure libraries
+azure-ai-inference==1.0.0b9
+azure-ai-agents==1.1.0
+azure-ai-projects==1.0.0
+azure-core==1.38.2
+azure-identity==1.25.2
+azure-search-documents==11.6.0
+azure-storage-blob==12.28.0
 
 # Vector Databases and Embeddings
-chromadb
-sentence-transformers
-faiss-cpu  # Note: faiss-gpu not available for Windows, but PyTorch will use GPU
+chromadb==1.5.1
+sentence-transformers==5.2.3
+faiss-cpu==1.13.2
 
 # Utilities
-python-dotenv
-ipykernel
-ipywidgets
+python-dotenv==1.2.1
+ipykernel==7.2.0
+ipywidgets==8.1.8
+tqdm==4.67.3
+tiktoken==0.12.0
 
 # Document Processing
-unstructured
-unstructured[docx]
-pypdf
-bs4
-arxiv
-pymupdf
-wikipedia
-python-docx
-docx2txt
+unstructured==0.21.5
+pypdf==6.7.4
+bs4==0.0.2
+arxiv==2.4.0
+PyMuPDF==1.27.1
+wikipedia==1.4.0
+python-docx==1.2.0
+docx2txt==0.9
 
-# Other Tools
-tqdm
-tiktoken
+# Additional dependencies that may be needed
+requests==2.32.5
+pydantic==2.12.5
+openai==2.24.0
+groq==0.37.1
+ollama==0.6.1
+pandas==2.3.3
 jq
