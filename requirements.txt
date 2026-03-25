@@ -73,3 +73,5 @@ groq
 ollama
 pandas
 jq
+arxiv
+wikipedia
