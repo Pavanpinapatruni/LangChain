@@ -1,0 +1,45 @@
+Transformer models have revolutionized deep learning by replacing recurrent connections with self-attention mechanisms, allowing for parallel computation and capturing long-range dependencies. Based on their architecture and training, they are generally categorized into Encoder-only, Decoder-only, and Encoder-Decoder (Seq2Seq) models. 
+Medium
+Medium
+ +4
+Here is an explanation of the primary transformer variants:
+1. Encoder-Only Transformers (Autoencoding Models)
+These models process the input sequence entirely at once to build a meaningful, bidirectional representation of the data. They are excellent for language understanding, classification, and token-level tasks. 
+Medium
+Medium
+ +4
+BERT (Bidirectional Encoder Representations from Transformers): Google's seminal model that reads text bidirectional, considering both left and right context, making it superior for tasks like sentiment analysis, question answering, and named entity recognition.
+RoBERTa (Robustly Optimized BERT Pretraining Approach): An improved training approach for BERT that performs better on general language understanding tasks.
+Other variants: ALBERT (lightweight BERT), DistilBERT (faster, smaller BERT). 
+GeeksforGeeks
+GeeksforGeeks
+ +4
+2. Decoder-Only Transformers (Autoregressive Models)
+These models focus on generating text, using a masked attention mechanism where each word can only attend to previous tokens in the sequence. 
+Medium
+Medium
+ +1
+GPT (Generative Pre-trained Transformer) Series: OpenAI's models (GPT-2, GPT-3, GPT-4) dominate text generation, summarization, and dialogue.
+LLaMA (Large Language Model Meta AI): A family of efficient LLMs developed by Meta for text generation and dialogue.
+Gemma: Google's family of generative models. 
+Exxact Corp.
+Exxact Corp.
+ +3
+3. Encoder-Decoder Transformers (Sequence-to-Sequence)
+These retain the original transformer architecture, using an encoder to understand the input and a decoder to generate the output, mapping one sequence to another. 
+Medium
+Medium
+ +1
+T5 (Text-To-Text Transfer Transformer): Treats every NLP task as a text-to-text problem, enabling a single model to handle translation, summarization, and classification.
+BART: Combines BERT-like bidirectional encoders with GPT-like autoregressive decoders, making it effective for text summarization and translation. 
+Medium
+Medium
+ +4
+4. Specialized and Efficient Transformers
+Vision Transformer (ViT): Adapts the transformer architecture for computer vision by breaking images into patches and treating them as sequences. It achieves competitive results on image classification.
+Transformer-XL: Introduced to allow learning longer-range dependencies than the original transformer by introducing a segment-level recurrence mechanism.
+Longformer / Reformer: Utilize sparse attention mechanisms to overcome the quadratic computational complexity (
+
+
+
+) of standard attention, making them suitable for processing very long texts. 
